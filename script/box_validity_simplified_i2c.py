@@ -27,6 +27,8 @@ import smbus
 i2c = smbus.SMBus(1)
 I2C_ADD = 0x09 # Arduino I2C address
 
+prevI2CData = 0
+
 class BoxIDValidate_node:
 	def __init__(self):
 
