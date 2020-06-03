@@ -34,7 +34,7 @@ class BoxIDTrigger_node:
 		self.prevI2CData = 0
 
 		# Initializing your ROS Node
-		rospy.init_node('box_validity', anonymous=False)
+		rospy.init_node('box_trigger', anonymous=False)
 
 		# Subscribe Int32 msg
 		self.boxID_activation_sub = rospy.Subscriber("/boxID_activation", Int32, self.cbBoxTrigger)
