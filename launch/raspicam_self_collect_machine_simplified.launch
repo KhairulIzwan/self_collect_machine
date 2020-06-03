@@ -38,4 +38,10 @@
 		name="customer_barcode_validate_record">
 	</node>
 
+	<!-- Customer (with i2c)-->
+	<!-- Box Trigger -->
+	<node	pkg="self_collect_machine"
+		type="box_trigger_simplified_i2c.py"
+		name="box_trigger">
+	</node>
 </launch>
