@@ -44,7 +44,7 @@ class BoxIDValidate_node:
 
 		while not rospy.is_shutdown():
 			# Read
-			I2Cdata = readI2C()
+			I2Cdata = self.readI2C()
 			if I2Cdata != prevI2CData:
 				prevI2CData = I2Cdata
 				if I2Cdata == 1:
@@ -74,9 +74,9 @@ class BoxIDValidate_node:
 			self.boxState.data = boxState
 			self.boxStatus_pub.publish(self.boxState)
 
-def readI2C():
-	inData = i2c.read_byte(I2C_ADD)
-	return inData
+	def readI2C():
+		inData = i2c.read_byte(I2C_ADD)
+		return inData
 
 def main(args):
 
