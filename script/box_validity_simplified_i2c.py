@@ -27,12 +27,11 @@ import smbus
 i2c = smbus.SMBus(1)
 I2C_ADD = 0x09 # Arduino I2C address
 
-prevI2CData = 0
-
 class BoxIDValidate_node:
 	def __init__(self):
 
 		self.boxState = boxStatus()
+		self.prevI2CData = 0
 
 		# Initializing your ROS Node
 		rospy.init_node('box_validity', anonymous=False)
@@ -47,8 +46,8 @@ class BoxIDValidate_node:
 		while not rospy.is_shutdown():
 			# Read
 			I2Cdata = self.readI2C()
-			if I2Cdata != prevI2CData:
-				prevI2CData = I2Cdata
+			if I2Cdata != self.prevI2CData:
+				self.prevI2CData = I2Cdata
 				if I2Cdata == 1:
 					boxState = [1, 1, 1]
 		
