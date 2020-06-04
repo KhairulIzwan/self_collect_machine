@@ -80,6 +80,9 @@ class BoxIDDisplay_node:
 #					text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
 			pass
 
+		with canvas(self.virtual) as draw:
+			text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
+
 if __name__ == '__main__':
 
 	# Initialize
