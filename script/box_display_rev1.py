@@ -66,7 +66,7 @@ class BoxIDDisplay_node:
 		self.typeQR = mode
 
 	def update_display(self):
-		if self.sensor_received:
+		if self.sensor_received == True:
 #			show_message(self.device, 'Box:{}'.format(self.sensor_value), fill="white", 
 #				font=proportional(LCD_FONT), scroll_delay=0.08)
 			with canvas(self.virtual) as draw:
