@@ -73,7 +73,7 @@ class BoxIDDisplay_node:
 				text(draw, (1, 1), "{}".format(self.sensor_value), 
 					fill="white", font=proportional(CP437_FONT))
 
-				rospy.sleep(1)
+				rospy.sleep(10)
 				self.sensor_received = False
 
 		else:
