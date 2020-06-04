@@ -83,6 +83,16 @@ class BarcodeRecognition_node:
 		self.code_received = True
 		self.typeQR = mode
 
+	def cbStatus(self, msg):
+
+		try:
+			scan = msg.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.status_received = True
+		self.status = scan
+
 	# Get the Scanned Barcode
 	def getBarcode(self):
 		try:
