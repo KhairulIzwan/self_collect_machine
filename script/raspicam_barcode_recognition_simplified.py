@@ -93,6 +93,20 @@ class BarcodeRecognition_node:
 		self.status_received = True
 		self.status = scan
 
+	def preview(self):
+
+		if self.image_received:
+			# Overlay some text onto the image display
+			timestr = time.strftime("%Y%m%d-%H%M%S")
+			cv2.putText(self.image, timestr, (10, 20), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+
+			# show the output frame
+			cv2.imshow("Frame", self.image)
+			cv2.waitKey(1)
+
+		else:
+			rospy.logerr("No images recieved")
+
 	# Get the Scanned Barcode
 	def getBarcode(self):
 		try:
