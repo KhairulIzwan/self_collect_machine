@@ -44,4 +44,11 @@
 		type="box_trigger_simplified_i2c.py"
 		name="box_trigger">
 	</node>
+
+	<!-- Display MAX7219-->
+	<!-- Box Trigger -->
+	<node	pkg="self_collect_machine"
+		type="box_display_rev1.py"
+		name="box_trigger">
+	</node>
 </launch>

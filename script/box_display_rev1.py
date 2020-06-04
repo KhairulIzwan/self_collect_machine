@@ -67,11 +67,14 @@ class BoxIDDisplay_node:
 
 	def update_display(self):
 		if self.sensor_received:
-			show_message(self.device, 'Box:{}'.format(self.sensor_value), fill="white", 
-				font=proportional(LCD_FONT), scroll_delay=0.08)
-#			with canvas(self.virtual) as draw:
-#				text(draw, (1, 1), "Box:{}".format(self.sensor_value), 
-#					fill="white", font=proportional(LCD_FONT))
+#			show_message(self.device, 'Box:{}'.format(self.sensor_value), fill="white", 
+#				font=proportional(LCD_FONT), scroll_delay=0.08)
+			with canvas(self.virtual) as draw:
+				text(draw, (1, 1), "{}".format(self.sensor_value), 
+					fill="white", font=proportional(LCD_FONT))
+				rospy.sleep(2)
+
+				self.sensor_received = False
 
 		else:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
