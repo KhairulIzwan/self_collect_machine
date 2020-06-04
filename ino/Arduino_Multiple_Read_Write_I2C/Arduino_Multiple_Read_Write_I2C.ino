@@ -40,7 +40,7 @@ void loop()
   {
     prevMode = mode;
 
-    if (mode == 0)
+    if (mode == 1)
     {
       delay(1000);
       digitalWrite(LED1, HIGH);
@@ -48,7 +48,7 @@ void loop()
       digitalWrite(LED1, LOW);
       delay(1000);
     }
-    else if (mode == 1)
+    else if (mode == 2)
     {
       delay(1000);
       digitalWrite(LED2, HIGH);
@@ -56,7 +56,7 @@ void loop()
       digitalWrite(LED2, LOW);
       delay(1000);
     }
-    else if (mode == 2)
+    else if (mode == 3)
     {
       delay(1000);
       digitalWrite(LED3, HIGH);
