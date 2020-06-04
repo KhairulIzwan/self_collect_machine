@@ -29,10 +29,6 @@ from luma.core.legacy.font import proportional, CP437_FONT, LCD_FONT
 
 class BoxIDDisplay_node:
 	def __init__(self):
-		self.serial = spi(port=0, device=0, gpio=noop())
-		self.device = max7219(self.serial, width=32, height=8, block_orientation=-90)
-		self.device.contrast(5)
-		self.virtual = viewport(self.device, width=32, height=16)
 
 		self.sensor_received = False
 		self.code_received = False
@@ -67,31 +63,37 @@ class BoxIDDisplay_node:
 
 	def update_display(self):
 		if self.sensor_received:
-#			show_message(self.device, 'Box:{}'.format(self.sensor_value), fill="white", 
-#				font=proportional(LCD_FONT), scroll_delay=0.08)
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "{}".format(self.sensor_value), 
-					fill="white", font=proportional(CP437_FONT))
-
-				rospy.sleep(1)
-				self.sensor_received = False
-
+			return True
 		else:
-#			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
-#				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-#			with canvas(self.virtual) as draw:
-#				text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
-			pass
+			return False
+
+	def boxYES(self):
+		return self.sensor_value
+
+	def boxBuffer(self):
+		return "NEXT" 
 
 if __name__ == '__main__':
+
+	serial = spi(port=0, device=0, gpio=noop())
+	device = max7219(serial, width=32, height=8, block_orientation=-90)
+	device.contrast(5)
+	virtual = viewport(device, width=32, height=16)
 
 	# Initialize
 	rospy.init_node('BoxIDDisplay_node', anonymous=False)
 	led = BoxIDDisplay_node()
 
 	# Take a photo
-	while not rospy.is_shutdown():
-		led.update_display()
+	if led.update_display:
+		box = led.boxYES()
+		with canvas(virtual) as draw:
+			text(draw, (1, 1), "{}".format(box), fill="white", font=proportional(CP437_FONT))
+		rospy.sleep(3)
+	else:
+		box = led.boxBuffer()
+		with canvas(virtual) as draw:
+			text(draw, (1, 1), "{}".format(box), fill="white", font=proportional(CP437_FONT))
 
 	# Sleep to give the last log messages time to be sent
 	rospy.sleep(1)
