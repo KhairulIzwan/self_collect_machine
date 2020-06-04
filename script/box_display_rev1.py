@@ -69,21 +69,21 @@ class BoxIDDisplay_node:
 		self.typeQR = mode
 
 	def update_display(self):
-		if self.sensor_received:
-#			show_message(self.device, 'BoxID: {}'.format(self.sensor), fill="white", 
-#				font=proportional(LCD_FONT), scroll_delay=0.08)
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "Box:{}".format(self.sensor_value), 
-					fill="white", font=proportional(LCD_FONT))
-				rospy.sleep(1)
-			return True
-		else:
-#			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
-#				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "N/A", 
-					fill="white", font=proportional(LCD_FONT))
-			return False
+		try:
+			if self.sensor_received:
+	#			show_message(self.device, 'BoxID: {}'.format(self.sensor), fill="white", 
+	#				font=proportional(LCD_FONT), scroll_delay=0.08)
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "Box:{}".format(self.sensor_value), 
+						fill="white", font=proportional(LCD_FONT))
+					rospy.sleep(1)
+			else:
+	#			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
+	#				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "N/A", fill="white", font=proportional(LCD_FONT))
+		except KeyboardInterrupt as e:
+			print(e)
 
 if __name__ == '__main__':
 
@@ -92,10 +92,8 @@ if __name__ == '__main__':
 	led = BoxIDDisplay_node()
 
 	# Take a photo
-	if led.update_display():
-		rospy.loginfo("DATA")
-	else:
-		rospy.logerr("DATA")
+	while not rospy.is_shutdown():
+		led.update_display()
 
 	# Sleep to give the last log messages time to be sent
 	rospy.sleep(1)
