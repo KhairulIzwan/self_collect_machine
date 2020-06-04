@@ -45,14 +45,10 @@ class BoxIDDisplay_node:
 		mode_topic = "/scan_mode"
 		self.mode_sub = rospy.Subscriber(mode_topic, String, self.cbQRmode)
 
-		# Allow up to one second to connection
-		rospy.sleep(1)
-
 	def callback(self, msg):
 
 		try:
 			sensor = msg.data
-			rospy.loginfo(sensor)
 		except KeyboardInterrupt as e:
 			print(e)
 
