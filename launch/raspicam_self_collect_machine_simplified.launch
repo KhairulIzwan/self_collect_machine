@@ -48,7 +48,7 @@
 	<!-- Display MAX7219-->
 	<!-- Box Trigger -->
 	<node	pkg="self_collect_machine"
-		type="box_display_simplified.py"
+		type="box_display_ver1.py"
 		name="box_display">
 	</node>
 </launch>
