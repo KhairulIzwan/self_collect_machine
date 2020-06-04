@@ -76,14 +76,15 @@ class BoxIDDisplay_node:
 				rospy.sleep(1)
 				self.sensor_received = False
 
-				text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
-
 		else:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
+#			with canvas(self.virtual) as draw:
+#				text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
 			pass
+
+		with canvas(self.virtual) as draw:
+			text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
 
 if __name__ == '__main__':
 
