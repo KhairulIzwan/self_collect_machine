@@ -66,22 +66,18 @@ class BoxIDDisplay_node:
 		self.typeQR = mode
 
 	def update_display(self):
-		if self.sensor_received:
-#			show_message(self.device, 'Box:{}'.format(self.sensor_value), fill="white", 
-#				font=proportional(LCD_FONT), scroll_delay=0.08)
+		try:
+			if self.sensor_received:
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "{}".format(self.sensor_value), 
+						fill="white", font=proportional(CP437_FONT))
+
+					rospy.sleep(1)
+					self.sensor_received = False
+
+		finally:
 			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "{}".format(self.sensor_value), 
-					fill="white", font=proportional(CP437_FONT))
-
-				rospy.sleep(1)
-				self.sensor_received = False
-
-		else:
-#			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
-#				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-#			with canvas(self.virtual) as draw:
-#				text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
-			pass
+				text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
 
 if __name__ == '__main__':
 
