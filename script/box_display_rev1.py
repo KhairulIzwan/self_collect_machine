@@ -71,16 +71,15 @@ class BoxIDDisplay_node:
 #				font=proportional(LCD_FONT), scroll_delay=0.08)
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "{}".format(self.sensor_value), 
-					fill="white", font=proportional(LCD_FONT))
-				rospy.sleep(2)
+					fill="white", font=proportional(CP437_FONT))
 
 				self.sensor_received = False
 
 		else:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-#			with canvas(self.virtual) as draw:
-#				text(draw, (1, 1), "N/A", fill="white", font=proportional(LCD_FONT))
+			with canvas(self.virtual) as draw:
+				text(draw, (1, 1), "N/A", fill="white", font=proportional(CP437_FONT))
 			pass
 
 if __name__ == '__main__':
