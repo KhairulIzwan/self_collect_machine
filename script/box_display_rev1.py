@@ -76,12 +76,14 @@ class BoxIDDisplay_node:
 				text(draw, (1, 1), "Box:{}".format(self.sensor_value), 
 					fill="white", font=proportional(LCD_FONT))
 				rospy.sleep(1)
+			return True
 		else:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "N/A", 
 					fill="white", font=proportional(LCD_FONT))
+			return False
 
 if __name__ == '__main__':
 
@@ -90,8 +92,10 @@ if __name__ == '__main__':
 	led = BoxIDDisplay_node()
 
 	# Take a photo
-	while not rospy.is_shutdown():
-		led.update_display()
+	if led.update_display():
+		rospy.loginfo("DATA")
+	else:
+		rospy.logerr("DATA")
 
 	# Sleep to give the last log messages time to be sent
 	rospy.sleep(1)
