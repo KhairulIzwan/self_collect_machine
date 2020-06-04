@@ -79,7 +79,7 @@ class BoxIDDisplay_node:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
 			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "N/A", fill="white", font=proportional(CP437_FONT))
+				text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
 			pass
 
 if __name__ == '__main__':

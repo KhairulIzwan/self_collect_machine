@@ -15,7 +15,7 @@ boolean buttonPressed2 = false;
 boolean buttonPressed3 = false;
 
 volatile int mode = 0;
-int prevMode = -1;
+int prevMode = 10000;
 
 void setup()
 {
@@ -42,6 +42,7 @@ void loop()
 
     if (mode == 0)
     {
+      delay(1000);
       digitalWrite(LED1, HIGH);
       delay(1000);
       digitalWrite(LED1, LOW);
@@ -49,6 +50,7 @@ void loop()
     }
     else if (mode == 1)
     {
+      delay(1000);
       digitalWrite(LED2, HIGH);
       delay(1000);
       digitalWrite(LED2, LOW);
@@ -56,6 +58,7 @@ void loop()
     }
     else if (mode == 2)
     {
+      delay(1000);
       digitalWrite(LED3, HIGH);
       delay(1000);
       digitalWrite(LED3, LOW);
