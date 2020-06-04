@@ -78,7 +78,7 @@ class BoxIDDisplay_node:
 		else:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-			rospy.warn("N/A")
+			rospy.logwarn("N/A")
 
 if __name__ == '__main__':
 
