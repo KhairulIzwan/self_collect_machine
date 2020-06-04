@@ -34,26 +34,51 @@ class BoxIDDisplay_node:
 		self.device.contrast(5)
 		self.virtual = viewport(self.device, width=32, height=16)
 
-		self.sensor = False
+		self.sensor_received = False
+		self.code_received = False
 
-		# Connect sensor topic
+		# Subscribe Int32 msg
 		sensor_topic = "/boxNumber"
 		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.callback)
+
+		# Subscribe String msg
+		mode_topic = "/scan_mode"
+		self.mode_sub = rospy.Subscriber(mode_topic, String, self.cbQRmode)
 
 		# Allow up to one second to connection
 		rospy.sleep(1)
 
 	def callback(self, data):
 
-		self.sensor = data.data
+		try:
+			sensor = data.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.sensor_received = True
+		self.sensor_value = sensor
+
+	def cbQRmode(self, msg):
+
+		try:
+			mode = msg.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.code_received = True
+		self.typeQR = mode
 
 	def update_display(self):
-		if self.sensor == True:
-			show_message(self.device, 'BoxID: {}'.format(self.sensor), fill="white", 
-				font=proportional(LCD_FONT), scroll_delay=0.08)
+		if self.sensor_received:
+#			show_message(self.device, 'BoxID: {}'.format(self.sensor), fill="white", 
+#				font=proportional(LCD_FONT), scroll_delay=0.08)
+			with canvas(self.virtual) as draw:
+				text(draw, (1, 1), 'BoxID: {}'.format(self.sensor_value), 
+					fill="white", font=proportional(CP437_FONT))
 		else:
-			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
-				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
+#			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
+#				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
+			rospy.warn("N/A")
 
 if __name__ == '__main__':
 
