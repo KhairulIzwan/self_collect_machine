@@ -61,7 +61,7 @@ class BarcodeRecognition_node:
 
 		# Convert image to OpenCV format
 		try:
-			cv_image = np.fromstring(msg, np.uint8)
+			cv_image = np.fromstring(msg.data, np.uint8)
 			cv_image = cv2.imdecode(cv_image, cv2.IMREAD_COLOR)
 
 			# OPTIONAL -- image-rotate """
