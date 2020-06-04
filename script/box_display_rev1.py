@@ -67,17 +67,17 @@ class BoxIDDisplay_node:
 
 	def update_display(self):
 		if self.sensor_received:
-#			show_message(self.device, 'BoxID: {}'.format(self.sensor), fill="white", 
-#				font=proportional(LCD_FONT), scroll_delay=0.08)
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "Box:{}".format(self.sensor_value), 
-					fill="white", font=proportional(LCD_FONT))
+			show_message(self.device, 'Box:{}'.format(self.sensor_value), fill="white", 
+				font=proportional(LCD_FONT), scroll_delay=0.08)
+#			with canvas(self.virtual) as draw:
+#				text(draw, (1, 1), "Box:{}".format(self.sensor_value), 
+#					fill="white", font=proportional(LCD_FONT))
 
 		else:
 #			show_message(self.device, 'Welcome to AUTOBOTIC Self Collect Machine', 
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "N/A", fill="white", font=proportional(LCD_FONT))
+#			with canvas(self.virtual) as draw:
+#				text(draw, (1, 1), "N/A", fill="white", font=proportional(LCD_FONT))
 
 if __name__ == '__main__':
 
