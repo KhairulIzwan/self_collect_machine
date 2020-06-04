@@ -48,10 +48,11 @@ class BoxIDDisplay_node:
 		# Allow up to one second to connection
 		rospy.sleep(1)
 
-	def callback(self, data):
+	def callback(self, msg):
 
 		try:
-			sensor = data.data
+			sensor = msg.data
+			rospy.loginfo(sensor)
 		except KeyboardInterrupt as e:
 			print(e)
 
