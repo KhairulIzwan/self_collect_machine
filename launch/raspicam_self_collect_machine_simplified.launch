@@ -6,7 +6,7 @@
 	<!-- Store and Customer -->
 	<!-- BarCode/QR-Code Recognition -->
 	<node	pkg="self_collect_machine"
-		type="raspicam_barcode_recognition_rev1.py"
+		type="raspicam_barcode_recognition_simplified.py"
 		name="raspicam_barcode_recognition">
 	</node>
 
