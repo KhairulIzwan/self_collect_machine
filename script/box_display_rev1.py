@@ -78,6 +78,7 @@ class BoxIDDisplay_node:
 #				fill="white", font=proportional(LCD_FONT), scroll_delay=0.08)
 #			with canvas(self.virtual) as draw:
 #				text(draw, (1, 1), "N/A", fill="white", font=proportional(LCD_FONT))
+			pass
 
 if __name__ == '__main__':
 
