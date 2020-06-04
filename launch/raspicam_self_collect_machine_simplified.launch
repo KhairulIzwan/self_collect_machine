@@ -49,6 +49,6 @@
 	<!-- Box Trigger -->
 	<node	pkg="self_collect_machine"
 		type="box_display_rev1.py"
-		name="box_trigger">
+		name="box_display">
 	</node>
 </launch>
