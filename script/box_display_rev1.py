@@ -75,9 +75,10 @@ class BoxIDDisplay_node:
 					rospy.sleep(1)
 					self.sensor_received = False
 
-		finally:
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
+			else:
+#				with canvas(self.virtual) as draw:
+#					text(draw, (1, 1), "NEXT", fill="white", font=proportional(CP437_FONT))
+				pass
 
 if __name__ == '__main__':
 
