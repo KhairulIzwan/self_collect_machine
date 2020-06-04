@@ -125,7 +125,7 @@ class BarcodeRecognition_node:
 					(self.x + self.w, self.y + self.h), (0, 0, 255), 2)
 
 				# Allow up to one second to connection
-				rospy.sleep(1)
+				rospy.sleep(0.5)
 
 				# the barcode data is a bytes object so if we want to 
 				# draw it on our output image we need to convert it to 
