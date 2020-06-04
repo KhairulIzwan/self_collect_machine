@@ -38,7 +38,7 @@ class BoxIDDisplay_node:
 		self.code_received = False
 
 		# Subscribe Int32 msg
-		sensor_topic = "/boxNumber"
+		sensor_topic = "/boxID_activation"
 		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.callback)
 
 		# Subscribe String msg
