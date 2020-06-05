@@ -106,6 +106,7 @@ class BoxIDDisplay_node:
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
 					self.code_received = False
+					self.sensor_value = " "
 				else:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
@@ -121,6 +122,7 @@ class BoxIDDisplay_node:
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
 					self.code_received = False
+					self.sensor_value = " "
 				else:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
