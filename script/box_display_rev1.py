@@ -106,7 +106,6 @@ class BoxIDDisplay_node:
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
 					self.code_received = False
-					self.sensor_value = " "
 				else:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
@@ -118,7 +117,7 @@ class BoxIDDisplay_node:
 			if self.typeQR == "store":
 				if self.box_received:
 					with canvas(self.virtual) as draw:
-						text(draw, (1, 1), "{}".format(self.boxuse + 1), 
+						text(draw, (1, 1), "{}".format(self.boxuse), 
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
 					self.code_received = False
@@ -133,6 +132,8 @@ class BoxIDDisplay_node:
 		else:
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
+			self.sensor_value = " "
+			self.boxuse = " "
 			pass
 
 if __name__ == '__main__':
