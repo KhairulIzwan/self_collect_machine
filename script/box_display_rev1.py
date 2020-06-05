@@ -117,7 +117,7 @@ class BoxIDDisplay_node:
 			if self.typeQR == "store":
 				if self.box_received:
 					with canvas(self.virtual) as draw:
-						text(draw, (1, 1), "{}".format(self.boxuse), 
+						text(draw, (1, 1), "{}".format(self.boxuse + 1), 
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
 					self.code_received = False
