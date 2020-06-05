@@ -109,7 +109,7 @@ class BoxIDDisplay_node:
 				else:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
-					rospy.sleep(5)
+#					rospy.sleep(5)
 			else:
 				#TODO
 				pass
@@ -124,7 +124,7 @@ class BoxIDDisplay_node:
 				else:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
-					rospy.sleep(5)
+#					rospy.sleep(5)
 			else:
 				#TODO
 				pass
