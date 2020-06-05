@@ -132,8 +132,8 @@ class BoxIDDisplay_node:
 		else:
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
-			self.sensor_value = " "
-			self.boxuse = " "
+#			self.sensor_value = " "
+#			self.boxuse = " "
 			pass
 
 if __name__ == '__main__':
