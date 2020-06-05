@@ -114,41 +114,45 @@ class BarcodeRecognition_node:
 			# find the barcodes in the frame and decode each of the barcodes
 			self.barcodes = pyzbar.decode(self.image)
 
-			# loop over the detected barcodes
-			for self.barcode in self.barcodes:
+			if len(self.barcodes) != 0:
+				# loop over the detected barcodes
+				for self.barcode in self.barcodes:
 
-				# extract the bounding box location of the barcode and 
-				# draw the bounding box surrounding the barcode on the 
-				# image
-				(self.x, self.y, self.w, self.h) = self.barcode.rect
-				cv2.rectangle(self.image, (self.x, self.y), 
-					(self.x + self.w, self.y + self.h), (0, 0, 255), 2)
+					# extract the bounding box location of the barcode and 
+					# draw the bounding box surrounding the barcode on the 
+					# image
+					(self.x, self.y, self.w, self.h) = self.barcode.rect
+					cv2.rectangle(self.image, (self.x, self.y), 
+						(self.x + self.w, self.y + self.h), (0, 0, 255), 2)
 
-				# Allow up to one second to connection
-				rospy.sleep(0.005)
+					# Allow up to one second to connection
+					rospy.sleep(0.005)
 
-				# the barcode data is a bytes object so if we want to 
-				# draw it on our output image we need to convert it to 
-				# a string first
-				self.barcodeData = self.barcode.data.decode("utf-8")
-				self.barcodeType = self.barcode.type
+					# the barcode data is a bytes object so if we want to 
+					# draw it on our output image we need to convert it to 
+					# a string first
+					self.barcodeData = self.barcode.data.decode("utf-8")
+					self.barcodeType = self.barcode.type
 
-				# Publishing
-				self.scanCode.data = self.barcodeData
-				self.code_pub.publish(self.scanCode)
+					# Publishing
+					self.scanCode.data = self.barcodeData
+					self.code_pub.publish(self.scanCode)
 
-			# Refresh the image on the screen
-			self.preview()
+				# Refresh the image on the screen
+				self.preview()
 
-			if self.code_received:
-				cv2.putText(self.image, self.typeQR, (10, 40), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+				if self.code_received:
+					cv2.putText(self.image, self.typeQR, (10, 40), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-				self.code_received = False
+					self.code_received = False
 
-			if self.status_received:
-				cv2.putText(self.image, self.status, (10, 60), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+				if self.status_received:
+					cv2.putText(self.image, self.status, (10, 60), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-				self.status_received = False
+					self.status_received = False
+
+			else:
+				pass
 
 		except KeyboardInterrupt as e:
 			print(e)

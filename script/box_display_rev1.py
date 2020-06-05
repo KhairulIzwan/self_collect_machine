@@ -78,21 +78,25 @@ class BoxIDDisplay_node:
 
 #		sleep(2)
 
-		if self.code_received:
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "{}".format(self.typeQR), 
-					fill="white", font=proportional(CP437_FONT))
-			rospy.sleep(2)
+#		if self.code_received:
+#			with canvas(self.virtual) as draw:
+#				text(draw, (1, 1), "{}".format(self.typeQR), 
+#					fill="white", font=proportional(LCD_FONT))
+#			rospy.sleep(2)
 
-			if self.sensor_received:
-				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "{}".format(self.sensor_value), 
-						fill="white", font=proportional(CP437_FONT))
-				rospy.sleep(2)
-			else:
-				pass
+		if self.sensor_received:
+			with canvas(self.virtual) as draw:
+				text(draw, (1, 1), "{}".format(self.sensor_value), 
+					fill="white", font=proportional(CP437_FONT))
+			rospy.sleep(5)
+			self.sensor_received = False
 		else:
-			pass
+			with canvas(self.virtual) as draw:
+				text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
+			rospy.sleep(5)
+#		else:
+#			#TODO
+#			pass
 
 if __name__ == '__main__':
 
