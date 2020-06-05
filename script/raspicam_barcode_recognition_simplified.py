@@ -152,6 +152,7 @@ class BarcodeRecognition_node:
 					self.status_received = False
 
 			else:
+				cv2.destroyAllWindows()
 				pass
 
 		except KeyboardInterrupt as e:
