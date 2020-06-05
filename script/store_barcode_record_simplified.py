@@ -16,7 +16,7 @@ import rospy
 import cv2
 import imutils
 
-from std_msgs.msg import String
+from std_msgs.msg import String, Int32
 from self_collect_machine.msg import boxStatus
 
 from pyzbar import pyzbar
