@@ -115,7 +115,7 @@ class BoxIDDisplay_node:
 				pass
 
 			if self.typeQR == "store":
-				if self.sensor_received:
+				if self.box_received:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), "{}".format(self.boxuse), 
 							fill="white", font=proportional(CP437_FONT))
