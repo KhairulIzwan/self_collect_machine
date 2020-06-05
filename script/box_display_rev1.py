@@ -98,9 +98,9 @@ class BoxIDDisplay_node:
 			else:
 				#TODO
 				pass
-#		else:
-#			#TODO
-#			pass
+		else:
+			#TODO
+			pass
 
 if __name__ == '__main__':
 
