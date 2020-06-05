@@ -36,16 +36,21 @@ class BoxIDDisplay_node:
 
 		self.sensor_received = False
 		self.code_received = False
+		self.box_received = False
 
 		# Subscribe Int32 msg
 		sensor_topic = "/boxID_activation"
-		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.callback)
+		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.cbID)
+
+		# Subscribe Int32 msg
+		box_topic = "/box_position"
+		self.box_sub = rospy.Subscriber(box_topic, Int32, self.cbBox)
 
 		# Subscribe String msg
 		mode_topic = "/scan_mode"
 		self.mode_sub = rospy.Subscriber(mode_topic, String, self.cbQRmode)
 
-	def callback(self, msg):
+	def cbID(self, msg):
 
 		try:
 			sensor = msg.data
@@ -64,6 +69,16 @@ class BoxIDDisplay_node:
 
 		self.code_received = True
 		self.typeQR = mode
+
+	def cbBox(self, msg):
+
+		try:
+			box = msg.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.box_received = True
+		self.boxuse = box
 
 	def update_display(self):
 
@@ -90,7 +105,22 @@ class BoxIDDisplay_node:
 						text(draw, (1, 1), "{}".format(self.sensor_value), 
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
-					self.sensor_received = False
+					self.code_received = False
+				else:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(5)
+			else:
+				#TODO
+				pass
+
+			if self.typeQR == "store"
+				if self.sensor_received:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "{}".format(self.boxuse), 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(5)
+					self.code_received = False
 				else:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
@@ -99,7 +129,8 @@ class BoxIDDisplay_node:
 				#TODO
 				pass
 		else:
-			#TODO
+			with canvas(self.virtual) as draw:
+						text(draw, (1, 1), " ", fill="white", font=proportional(CP437_FONT))
 			pass
 
 if __name__ == '__main__':

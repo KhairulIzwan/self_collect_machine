@@ -40,6 +40,7 @@ class StoreBarcodeRecord_node:
 
 		self.rospack = rospkg.RosPack()
 		self.scanStatus = String()
+		self.boxPos = Int32()
 
 		# Initializing your ROS Node
 		rospy.init_node('store_barcode_record', anonymous=False)
@@ -69,6 +70,9 @@ class StoreBarcodeRecord_node:
 		# TODO
 		# Publish String msg
 		self.scanStatus_pub = rospy.Publisher("/scan_status", String, queue_size=10)
+
+		# Publish Int32 msg
+		self.boxPos_pub = rospy.Publisher("/box_position", Int32, queue_size=10)
 
 		self.storeRecord()
 
@@ -103,6 +107,11 @@ class StoreBarcodeRecord_node:
 						# TODO: Publish a data to print on MAX2719
 
 						self.csv.write("{},{},{}\n".format(datetime.datetime.now(), self.qr.data, self.boxID[0]))
+
+						# Publish
+						self.boxPos.data = self.boxID[0]
+						self.boxPos_pub.publish(self.boxPos)
+
 						# TODO: Un-comment for troubleshoot
 						rospy.logwarn("Saved as: {},{},{}\n".format(datetime.datetime.now(), self.qr.data, self.boxID[0]))
 						self.csv.flush()
