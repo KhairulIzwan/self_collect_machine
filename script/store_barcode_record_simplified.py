@@ -109,7 +109,7 @@ class StoreBarcodeRecord_node:
 						self.csv.write("{},{},{}\n".format(datetime.datetime.now(), self.qr.data, self.boxID[0]))
 
 						# Publish
-						self.boxPos.data = self.boxID[0]
+						self.boxPos.data = self.boxID[0] + 1
 						self.boxPos_pub.publish(self.boxPos)
 
 						# TODO: Un-comment for troubleshoot
