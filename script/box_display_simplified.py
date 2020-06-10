@@ -27,73 +27,107 @@ from luma.led_matrix.device import max7219
 from luma.core.legacy import text, show_message
 from luma.core.legacy.font import proportional, CP437_FONT, LCD_FONT
 
-class BoxIDDisplay_node:
+class BoxIDDisplay:
 	def __init__(self):
+		self.serial = spi(port=0, device=0, gpio=noop())
+		self.device = max7219(self.serial, width=32, height=8, block_orientation=-90)
+		self.device.contrast(5)
+		self.virtual = viewport(self.device, width=32, height=16)
 
 		self.sensor_received = False
 		self.code_received = False
+		self.box_received = False
+
+		rospy.on_shutdown(self.shutdown)
 
 		# Subscribe Int32 msg
 		sensor_topic = "/boxID_activation"
-		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.callback)
+		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.cbID)
+
+		# Subscribe Int32 msg
+		box_topic = "/box_position"
+		self.box_sub = rospy.Subscriber(box_topic, Int32, self.cbBox)
 
 		# Subscribe String msg
 		mode_topic = "/scan_mode"
 		self.mode_sub = rospy.Subscriber(mode_topic, String, self.cbQRmode)
 
-	def callback(self, msg):
+		self.update_display()
+
+	def cbID(self, msg):
 
 		try:
-			sensor = msg.data
+			self.sensor = msg.data
 		except KeyboardInterrupt as e:
 			print(e)
 
 		self.sensor_received = True
-		self.sensor_value = sensor
 
 	def cbQRmode(self, msg):
 
 		try:
-			mode = msg.data
+			self.mode = msg.data
 		except KeyboardInterrupt as e:
 			print(e)
 
 		self.code_received = True
-		self.typeQR = mode
+
+	def cbBox(self, msg):
+
+		try:
+			self.box = msg.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.box_received = True
+
+	def shutdown(self):
+		try:
+			rospy.logwarn("BoxIDDisplay node [OFFLINE]")
+		finally:
+			cv2.destroyAllWindows()
 
 	def update_display(self):
-		if self.sensor_received:
-			return True
+
+		if self.code_received:
+			if self.mode == "customer":
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "CUST", fill="white", 
+						font=proportional(CP437_FONT))
+					rospy.sleep(2)
+				if self.sensor_received:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "{}".format(self.sensor), 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(2)
+					self.code_received = False
+			elif self.mode == "store":
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "STOR", fill="white", 
+						font=proportional(CP437_FONT))
+					rospy.sleep(2)
+				if self.box_received:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "{}".format(self.box), 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(2)
+					self.code_received = False
 		else:
-			return False
+			with canvas(self.virtual) as draw:
+				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
+			self.sensor_received = False
+			self.box_received = False
+			self.sensor = "N/A"
+			self.box = "N/A"
 
-	def boxYES(self):
-		return self.sensor_value
+def main(args):
+	display = BoxIDDisplay()
+	rospy.init_node("boxID_display", anonymous=False)
 
-	def boxBuffer(self):
-		return "NEXT" 
+	try:
+		rospy.spin()
+	except KeyboardInterrupt:
+		cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-
-	serial = spi(port=0, device=0, gpio=noop())
-	device = max7219(serial, width=32, height=8, block_orientation=-90)
-	device.contrast(5)
-	virtual = viewport(device, width=32, height=16)
-
-	# Initialize
-	rospy.init_node('BoxIDDisplay_node', anonymous=False)
-	led = BoxIDDisplay_node()
-
-	# Take a photo
-	if led.update_display:
-		box = led.boxYES()
-		with canvas(virtual) as draw:
-			text(draw, (1, 1), "{}".format(box), fill="white", font=proportional(CP437_FONT))
-		rospy.sleep(3)
-	else:
-		box = led.boxBuffer()
-		with canvas(virtual) as draw:
-			text(draw, (1, 1), "{}".format(box), fill="white", font=proportional(CP437_FONT))
-
-	# Sleep to give the last log messages time to be sent
-	rospy.sleep(1)
+	main(sys.argv)
