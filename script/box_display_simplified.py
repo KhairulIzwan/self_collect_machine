@@ -36,19 +36,17 @@ class BoxIDDisplay:
 
 		rospy.init_node("boxID_display", anonymous=False)
 
-		self.sensor_received = False
-		self.code_received = False
-		self.box_received = False
-
 		rospy.on_shutdown(self.shutdown)
 
 		# Subscribe Int32 msg
-		sensor_topic = "/boxID_activation"
-#		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.cbID)
+		self.sensor_topic = "/boxID_activation"
+#		self.sensor_sub = rospy.Subscriber(self.sensor_topic, Int32, self.cbID)
+		self.sensor_sub = rospy.Subscriber(self.sensor_topic, Int32)
 
 		# Subscribe Int32 msg
-		box_topic = "/box_position"
-#		self.box_sub = rospy.Subscriber(box_topic, Int32, self.cbBox)
+		self.box_topic = "/box_position"
+#		self.box_sub = rospy.Subscriber(self.box_topic, Int32, self.cbBox)
+		self.box_sub = rospy.Subscriber(self.box_topic, Int32)
 
 		# Subscribe String msg
 		self.mode_topic = "/scan_mode"
@@ -58,6 +56,7 @@ class BoxIDDisplay:
 		self.update_display()
 
 #	def cbID(self, msg):
+	def cbID(self):
 
 #		try:
 #			self.sensor = msg.data
@@ -65,6 +64,7 @@ class BoxIDDisplay:
 #			print(e)
 
 #		self.sensor_received = True
+		self.sensor = rospy.wait_for_message(self.sensor_topic, String)
 
 #	def cbQRmode(self, msg):
 	def cbQRmode(self):
@@ -78,6 +78,7 @@ class BoxIDDisplay:
 		self.mode = rospy.wait_for_message(self.mode_topic, String)
 
 #	def cbBox(self, msg):
+	def cbBox(self):
 
 #		try:
 #			self.box = msg.data
@@ -85,6 +86,7 @@ class BoxIDDisplay:
 #			print(e)
 
 #		self.box_received = True
+		self.box = rospy.wait_for_message(self.box_topic, String)
 
 	def shutdown(self):
 		try:
@@ -96,11 +98,14 @@ class BoxIDDisplay:
 
 		while not rospy.is_shutdown():
 			self.cbQRmode()
+			self.cbID()
+			self.cbBox()
 
 			if self.mode.data == "customer":
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "CUST", fill="white", 
 						font=proportional(CP437_FONT))
+				rospy.sleep(1)
 	#				if self.sensor_received:
 	#					with canvas(self.virtual) as draw:
 	#						text(draw, (1, 1), "{}".format(self.sensor), 
@@ -132,6 +137,18 @@ class BoxIDDisplay:
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "STOR", fill="white", 
 						font=proportional(CP437_FONT))
+					rospy.sleep(1)
+					if not self.box.data:
+						with canvas(self.virtual) as draw:
+							text(draw, (1, 1), "N/A", 
+								fill="white", font=proportional(CP437_FONT))
+						rospy.sleep(1)
+					else:
+						with canvas(self.virtual) as draw:
+							text(draw, (1, 1), "{}".format(self.box), 
+								fill="white", font=proportional(CP437_FONT))
+						rospy.sleep(1)
+
 			else:
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
