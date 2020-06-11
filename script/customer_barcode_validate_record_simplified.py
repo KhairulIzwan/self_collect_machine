@@ -95,7 +95,7 @@ class CustomerBarcodeRecord_node:
 								rospy.loginfo("Package(s) in box no {}".format(row[3]))
 
 								# Publishing
-								self.boxID_active.data = row[3] + 1
+								self.boxID_active.data = int(row[3]) + 1
 								self.boxID_activation_pub.publish(self.boxID_active)
 
 				else:
