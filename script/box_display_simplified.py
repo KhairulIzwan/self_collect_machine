@@ -34,6 +34,8 @@ class BoxIDDisplay:
 		self.device.contrast(5)
 		self.virtual = viewport(self.device, width=32, height=16)
 
+		rospy.init_node("boxID_display", anonymous=False)
+
 		self.sensor_received = False
 		self.code_received = False
 		self.box_received = False
@@ -144,7 +146,6 @@ class BoxIDDisplay:
 
 def main(args):
 	display = BoxIDDisplay()
-	rospy.init_node("boxID_display", anonymous=False)
 
 	try:
 		rospy.spin()
