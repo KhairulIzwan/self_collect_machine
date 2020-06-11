@@ -98,8 +98,8 @@ class BoxIDDisplay:
 
 		while not rospy.is_shutdown():
 			self.cbQRmode()
-			self.cbID()
-			self.cbBox()
+#			self.cbID()
+#			self.cbBox()
 
 			if self.mode.data == "customer":
 				with canvas(self.virtual) as draw:
@@ -138,6 +138,7 @@ class BoxIDDisplay:
 					text(draw, (1, 1), "STOR", fill="white", 
 						font=proportional(CP437_FONT))
 #				rospy.sleep(1)
+				self.cbBox()
 				if not self.box.data:
 					with canvas(self.virtual) as draw:
 						text(draw, (1, 1), "N/A", 
