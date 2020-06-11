@@ -105,34 +105,19 @@ class BoxIDDisplay:
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "CUST", fill="white", 
 						font=proportional(CP437_FONT))
-#				rospy.sleep(1)
-	#				if self.sensor_received:
-	#					with canvas(self.virtual) as draw:
-	#						text(draw, (1, 1), "{}".format(self.sensor), 
-	#							fill="white", font=proportional(CP437_FONT))
-	#					rospy.sleep(2)
-	#					self.code_received = False
-	#				else:
-	#					with canvas(self.virtual) as draw:
-	#						text(draw, (1, 1), "N/A", 
-	#							fill="white", font=proportional(CP437_FONT))
-	#					rospy.sleep(2)
-	#			elif self.mode == "store":
-	#				with canvas(self.virtual) as draw:
-	#					text(draw, (1, 1), "STOR", fill="white", 
-	#						font=proportional(CP437_FONT))
-	#					rospy.sleep(2)
-	#				if self.box_received:
-	#					with canvas(self.virtual) as draw:
-	#						text(draw, (1, 1), "{}".format(self.box), 
-	#							fill="white", font=proportional(CP437_FONT))
-	#					rospy.sleep(2)
-	#					self.code_received = False
-	#				else:
-	#					with canvas(self.virtual) as draw:
-	#						text(draw, (1, 1), "N/A", 
-	#							fill="white", font=proportional(CP437_FONT))
-	#					rospy.sleep(2)
+				rospy.sleep(1)
+				self.cbID()
+				if not self.sensor.data:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "N/A", 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(5)
+				else:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "{}".format(self.sensor.data), 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(5)
+					self.mode.data = 0
 			elif self.mode.data == "store":
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "STOR", fill="white", 
@@ -149,10 +134,11 @@ class BoxIDDisplay:
 						text(draw, (1, 1), "{}".format(self.box.data), 
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
+					self.mode.data = 0
 
-#			else:
-#				with canvas(self.virtual) as draw:
-#					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
+			else:
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
 	#			self.sensor_received = False
 	#			self.box_received = False
 	#			self.sensor = "N/A"
