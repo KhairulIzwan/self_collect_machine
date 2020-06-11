@@ -93,9 +93,10 @@ class BoxIDDisplay:
 	def update_display(self):
 
 		self.cbQRmode()
+		rospy.loginfo(self.mode.data)
 
-		if self.mode.data == "customer":
-			ropsy.loginfo("CUSTOMER")
+#		if self.mode.data == "customer":
+#			ropsy.loginfo("CUSTOMER")
 #			with canvas(self.virtual) as draw:
 #				text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
 #				rospy.sleep(1)
@@ -131,8 +132,8 @@ class BoxIDDisplay:
 #						text(draw, (1, 1), "N/A", 
 #							fill="white", font=proportional(CP437_FONT))
 #					rospy.sleep(2)
-		else:
-			ropsy.loginfo("CUSTOMER X")
+#		else:
+#			ropsy.loginfo("CUSTOMER X")
 #			with canvas(self.virtual) as draw:
 #				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
 #				rospy.sleep(1)
