@@ -36,6 +36,10 @@ class BoxIDDisplay:
 
 		rospy.on_shutdown(self.shutdown)
 
+		self.sensor_received = False
+		self.code_received = False
+		self.box_received = False
+
 		# Subscribe Int32 msg
 		self.sensor_topic = "/boxID_activation"
 		self.sensor_sub = rospy.Subscriber(self.sensor_topic, Int32, self.cbID)
@@ -55,6 +59,8 @@ class BoxIDDisplay:
 		except KeyboardInterrupt as e:
 			print(e)
 
+		self.sensor_received = True
+
 	def cbQRmode(self, msg):
 
 		try:
@@ -71,6 +77,8 @@ class BoxIDDisplay:
 		except KeyboardInterrupt as e:
 			print(e)
 
+		self.box_received = True
+
 	def shutdown(self):
 		try:
 			rospy.logwarn("BoxIDDisplay node [OFFLINE]")
@@ -84,14 +92,14 @@ class BoxIDDisplay:
 				text(draw, (1, 1), "CUST", fill="white", 
 					font=proportional(CP437_FONT))
 			rospy.sleep(1)
-			if not self.sensor:
+			if self.sensor_received:
 				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "N/A", 
+					text(draw, (1, 1), "{}".format(self.sensor.data), 
 						fill="white", font=proportional(CP437_FONT))
 				rospy.sleep(5)
 			else:
 				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "{}".format(self.sensor.data), 
+					text(draw, (1, 1), "N/A", 
 						fill="white", font=proportional(CP437_FONT))
 				rospy.sleep(5)
 		elif self.mode == "store":
@@ -99,14 +107,14 @@ class BoxIDDisplay:
 				text(draw, (1, 1), "STOR", fill="white", 
 					font=proportional(CP437_FONT))
 			rospy.sleep(1)
-			if not self.box:
+			if self.box_received:
 				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "N/A", 
+					text(draw, (1, 1), "{}".format(self.box.data), 
 						fill="white", font=proportional(CP437_FONT))
 				rospy.sleep(5)
 			else:
 				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "{}".format(self.box.data), 
+					text(draw, (1, 1), "N/A", 
 						fill="white", font=proportional(CP437_FONT))
 				rospy.sleep(5)
 		else:
