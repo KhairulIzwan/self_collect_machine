@@ -94,7 +94,7 @@ class BoxIDDisplay:
 #				rospy.sleep(2)
 				text(draw, (1, 1), "{}".format(self.sensor), 
 						fill="white", font=proportional(CP437_FONT))
-				rospy.sleep(2)
+				rospy.sleep(1)
 #			if self.sensor_received:
 #				with canvas(self.virtual) as draw:
 #					text(draw, (1, 1), "{}".format(self.sensor), 
@@ -115,7 +115,7 @@ class BoxIDDisplay:
 #				rospy.sleep(2)
 				text(draw, (1, 1), "{}".format(self.box), 
 						fill="white", font=proportional(CP437_FONT))
-				rospy.sleep(2)
+				rospy.sleep(1)
 #			if self.box_received:
 #				with canvas(self.virtual) as draw:
 #					text(draw, (1, 1), "{}".format(self.box), 
