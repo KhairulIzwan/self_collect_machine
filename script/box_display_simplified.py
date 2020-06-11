@@ -49,8 +49,9 @@ class BoxIDDisplay:
 		self.box_sub = rospy.Subscriber(box_topic, Int32, self.cbBox)
 
 		# Subscribe String msg
-		mode_topic = "/scan_mode"
-		self.mode_sub = rospy.Subscriber(mode_topic, String, self.cbQRmode)
+		self.mode_topic = "/scan_mode"
+#		self.mode_sub = rospy.Subscriber(self.mode_topic, String, self.cbQRmode)
+		self.mode_sub = rospy.Subscriber(self.mode_topic, String)
 
 		self.update_display()
 
@@ -63,14 +64,16 @@ class BoxIDDisplay:
 
 		self.sensor_received = True
 
-	def cbQRmode(self, msg):
+#	def cbQRmode(self, msg):
+	def cbQRmode(self):
 
-		try:
-			self.mode = msg.data
-		except KeyboardInterrupt as e:
-			print(e)
+#		try:
+#			self.mode = msg.data
+#		except KeyboardInterrupt as e:
+#			print(e)
 
-		self.code_received = True
+#		self.code_received = True
+		self.mode = rospy.wait_for_message(self.mode_topic, String)
 
 	def cbBox(self, msg):
 
@@ -89,7 +92,9 @@ class BoxIDDisplay:
 
 	def update_display(self):
 
-		if self.mode == "customer":
+		self.cbQRmode()
+
+		if self.mode.data == "customer":
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
 #			if self.mode == "customer":
