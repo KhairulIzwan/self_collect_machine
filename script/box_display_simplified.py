@@ -98,8 +98,8 @@ class BoxIDDisplay:
 
 		while not rospy.is_shutdown():
 			self.cbQRmode()
-#			self.cbID()
-#			self.cbBox()
+			self.cbID()
+			self.cbBox()
 
 			if self.mode.data == "customer":
 				with canvas(self.virtual) as draw:
