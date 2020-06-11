@@ -101,6 +101,11 @@ class BoxIDDisplay:
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(2)
 					self.code_received = False
+				else:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "N/A", 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(2)
 			elif self.mode == "store":
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "STOR", fill="white", 
@@ -112,6 +117,11 @@ class BoxIDDisplay:
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(2)
 					self.code_received = False
+				else:
+					with canvas(self.virtual) as draw:
+						text(draw, (1, 1), "N/A", 
+							fill="white", font=proportional(CP437_FONT))
+					rospy.sleep(2)
 		else:
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
