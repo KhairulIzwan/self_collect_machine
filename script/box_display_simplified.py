@@ -117,7 +117,6 @@ class BoxIDDisplay:
 						text(draw, (1, 1), "{}".format(self.sensor.data), 
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
-					self.mode.data = 0
 			elif self.mode.data == "store":
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "STOR", fill="white", 
@@ -134,11 +133,9 @@ class BoxIDDisplay:
 						text(draw, (1, 1), "{}".format(self.box.data), 
 							fill="white", font=proportional(CP437_FONT))
 					rospy.sleep(5)
-					self.mode.data = 0
-
-			else:
-				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
+#			else:
+#				with canvas(self.virtual) as draw:
+#					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
 	#			self.sensor_received = False
 	#			self.box_received = False
 	#			self.sensor = "N/A"
