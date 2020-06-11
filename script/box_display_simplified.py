@@ -138,8 +138,8 @@ def main(args):
 
 	try:
 		rospy.spin()
-	except KeyboardInterrupt:
-		cv2.destroyAllWindows()
+	except KeyboardInterrupt as e:
+		print(e)
 
 if __name__ == '__main__':
 	main(sys.argv)
