@@ -42,11 +42,11 @@ class BoxIDDisplay:
 
 		# Subscribe Int32 msg
 		sensor_topic = "/boxID_activation"
-		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.cbID)
+#		self.sensor_sub = rospy.Subscriber(sensor_topic, Int32, self.cbID)
 
 		# Subscribe Int32 msg
 		box_topic = "/box_position"
-		self.box_sub = rospy.Subscriber(box_topic, Int32, self.cbBox)
+#		self.box_sub = rospy.Subscriber(box_topic, Int32, self.cbBox)
 
 		# Subscribe String msg
 		self.mode_topic = "/scan_mode"
@@ -55,14 +55,14 @@ class BoxIDDisplay:
 
 		self.update_display()
 
-	def cbID(self, msg):
+#	def cbID(self, msg):
 
-		try:
-			self.sensor = msg.data
-		except KeyboardInterrupt as e:
-			print(e)
+#		try:
+#			self.sensor = msg.data
+#		except KeyboardInterrupt as e:
+#			print(e)
 
-		self.sensor_received = True
+#		self.sensor_received = True
 
 #	def cbQRmode(self, msg):
 	def cbQRmode(self):
@@ -75,14 +75,14 @@ class BoxIDDisplay:
 #		self.code_received = True
 		self.mode = rospy.wait_for_message(self.mode_topic, String)
 
-	def cbBox(self, msg):
+#	def cbBox(self, msg):
 
-		try:
-			self.box = msg.data
-		except KeyboardInterrupt as e:
-			print(e)
+#		try:
+#			self.box = msg.data
+#		except KeyboardInterrupt as e:
+#			print(e)
 
-		self.box_received = True
+#		self.box_received = True
 
 	def shutdown(self):
 		try:
