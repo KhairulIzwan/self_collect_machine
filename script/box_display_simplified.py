@@ -98,7 +98,7 @@ class BoxIDDisplay:
 			self.cbQRmode()
 
 			if self.mode.data == "customer":
-				ropsy.loginfo("CUSTOMER")
+				rospy.loginfo("CUSTOMER")
 	#			with canvas(self.virtual) as draw:
 	#				text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
 	#				rospy.sleep(1)
@@ -135,7 +135,7 @@ class BoxIDDisplay:
 	#							fill="white", font=proportional(CP437_FONT))
 	#					rospy.sleep(2)
 			else:
-				ropsy.loginfo("CUSTOMER X")
+				rospy.loginfo("CUSTOMER X")
 	#			with canvas(self.virtual) as draw:
 	#				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
 	#				rospy.sleep(1)
