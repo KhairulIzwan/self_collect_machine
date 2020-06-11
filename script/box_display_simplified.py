@@ -94,8 +94,9 @@ class BoxIDDisplay:
 
 	def update_display(self):
 
-		self.cbQRmode()
-		rospy.loginfo(self.mode.data)
+		while not rospy.is_shutdown():
+			self.cbQRmode()
+			rospy.loginfo(self.mode.data)
 
 #		if self.mode.data == "customer":
 #			ropsy.loginfo("CUSTOMER")
