@@ -96,9 +96,9 @@ class BoxIDDisplay:
 
 		if self.mode.data == "customer":
 			ropsy.loginfo("CUSTOMER")
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
-				rospy.sleep(1)
+#			with canvas(self.virtual) as draw:
+#				text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
+#				rospy.sleep(1)
 #			if self.mode == "customer":
 #				with canvas(self.virtual) as draw:
 #					text(draw, (1, 1), "CUST", fill="white", 
@@ -133,9 +133,9 @@ class BoxIDDisplay:
 #					rospy.sleep(2)
 		else:
 			ropsy.loginfo("CUSTOMER X")
-			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
-				rospy.sleep(1)
+#			with canvas(self.virtual) as draw:
+#				text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
+#				rospy.sleep(1)
 #			self.sensor_received = False
 #			self.box_received = False
 #			self.sensor = "N/A"
