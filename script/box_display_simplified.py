@@ -89,9 +89,9 @@ class BoxIDDisplay:
 
 		if self.mode == "customer" and self.sensor_received:
 			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "CUST", fill="white", 
-					font=proportional(CP437_FONT))
-				rospy.sleep(2)
+#				text(draw, (1, 1), "CUST", fill="white", 
+#					font=proportional(CP437_FONT))
+#				rospy.sleep(2)
 				text(draw, (1, 1), "{}".format(self.sensor), 
 						fill="white", font=proportional(CP437_FONT))
 				rospy.sleep(2)
@@ -110,9 +110,9 @@ class BoxIDDisplay:
 #				self.mode = "N/A"
 		elif self.mode == "store" and self.box_received:
 			with canvas(self.virtual) as draw:
-				text(draw, (1, 1), "STOR", fill="white", 
-					font=proportional(CP437_FONT))
-				rospy.sleep(2)
+#				text(draw, (1, 1), "STOR", fill="white", 
+#					font=proportional(CP437_FONT))
+#				rospy.sleep(2)
 				text(draw, (1, 1), "{}".format(self.box), 
 						fill="white", font=proportional(CP437_FONT))
 				rospy.sleep(2)
