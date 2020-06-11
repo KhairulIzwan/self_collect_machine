@@ -40,6 +40,8 @@ class BoxIDDisplay:
 		self.code_received = False
 		self.box_received = False
 
+		self.mode.data == " "
+
 		rospy.on_shutdown(self.shutdown)
 
 		# Subscribe Int32 msg
@@ -99,13 +101,8 @@ class BoxIDDisplay:
 
 			if self.mode.data == "customer":
 				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
-	#				rospy.sleep(1)
-	#			if self.mode == "customer":
-	#				with canvas(self.virtual) as draw:
-	#					text(draw, (1, 1), "CUST", fill="white", 
-	#						font=proportional(CP437_FONT))
-	#					rospy.sleep(2)
+					text(draw, (1, 1), "CUST", fill="white", 
+						font=proportional(CP437_FONT))
 	#				if self.sensor_received:
 	#					with canvas(self.virtual) as draw:
 	#						text(draw, (1, 1), "{}".format(self.sensor), 
@@ -133,6 +130,10 @@ class BoxIDDisplay:
 	#						text(draw, (1, 1), "N/A", 
 	#							fill="white", font=proportional(CP437_FONT))
 	#					rospy.sleep(2)
+			elif self.mode.data == "store":
+				with canvas(self.virtual) as draw:
+					text(draw, (1, 1), "STOR", fill="white", 
+						font=proportional(CP437_FONT))
 			else:
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
