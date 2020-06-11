@@ -137,17 +137,17 @@ class BoxIDDisplay:
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "STOR", fill="white", 
 						font=proportional(CP437_FONT))
-					rospy.sleep(1)
-					if not self.box.data:
-						with canvas(self.virtual) as draw:
-							text(draw, (1, 1), "N/A", 
-								fill="white", font=proportional(CP437_FONT))
-						rospy.sleep(1)
-					else:
-						with canvas(self.virtual) as draw:
-							text(draw, (1, 1), "{}".format(self.box), 
-								fill="white", font=proportional(CP437_FONT))
-						rospy.sleep(1)
+				rospy.sleep(1)
+#				if not self.box.data:
+#					with canvas(self.virtual) as draw:
+#						text(draw, (1, 1), "N/A", 
+#							fill="white", font=proportional(CP437_FONT))
+#					rospy.sleep(1)
+#				else:
+#					with canvas(self.virtual) as draw:
+#						text(draw, (1, 1), "{}".format(self.box), 
+#							fill="white", font=proportional(CP437_FONT))
+#					rospy.sleep(1)
 
 			else:
 				with canvas(self.virtual) as draw:
