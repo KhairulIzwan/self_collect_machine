@@ -98,14 +98,14 @@ class BoxIDDisplay:
 
 		while not rospy.is_shutdown():
 			self.cbQRmode()
-			self.cbID()
-			self.cbBox()
+#			self.cbID()
+#			self.cbBox()
 
 			if self.mode.data == "customer":
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "CUST", fill="white", 
 						font=proportional(CP437_FONT))
-				rospy.sleep(1)
+#				rospy.sleep(1)
 	#				if self.sensor_received:
 	#					with canvas(self.virtual) as draw:
 	#						text(draw, (1, 1), "{}".format(self.sensor), 
@@ -137,7 +137,7 @@ class BoxIDDisplay:
 				with canvas(self.virtual) as draw:
 					text(draw, (1, 1), "STOR", fill="white", 
 						font=proportional(CP437_FONT))
-				rospy.sleep(1)
+#				rospy.sleep(1)
 #				if not self.box.data:
 #					with canvas(self.virtual) as draw:
 #						text(draw, (1, 1), "N/A", 
@@ -149,9 +149,9 @@ class BoxIDDisplay:
 #							fill="white", font=proportional(CP437_FONT))
 #					rospy.sleep(1)
 
-			else:
-				with canvas(self.virtual) as draw:
-					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
+#			else:
+#				with canvas(self.virtual) as draw:
+#					text(draw, (1, 1), "SCAN", fill="white", font=proportional(CP437_FONT))
 	#			self.sensor_received = False
 	#			self.box_received = False
 	#			self.sensor = "N/A"
