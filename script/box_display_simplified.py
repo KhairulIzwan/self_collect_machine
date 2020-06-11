@@ -89,7 +89,7 @@ class BoxIDDisplay:
 
 	def update_display(self):
 
-		if self.code_received:
+		if self.mode == "customer":
 			with canvas(self.virtual) as draw:
 				text(draw, (1, 1), "TRUE", fill="white", font=proportional(CP437_FONT))
 #			if self.mode == "customer":
