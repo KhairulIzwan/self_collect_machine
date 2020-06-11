@@ -74,6 +74,7 @@ class BoxIDDisplay:
 
 #		self.code_received = True
 		self.mode = rospy.wait_for_message(self.mode_topic, String)
+		rospy.loginfo(self.mode.data)
 
 #	def cbBox(self, msg):
 
@@ -93,7 +94,7 @@ class BoxIDDisplay:
 	def update_display(self):
 
 		self.cbQRmode()
-		rospy.loginfo(self.mode.data)
+#		rospy.loginfo(self.mode.data)
 
 #		if self.mode.data == "customer":
 #			ropsy.loginfo("CUSTOMER")
