@@ -40,8 +40,6 @@ class BoxIDDisplay:
 		self.code_received = False
 		self.box_received = False
 
-		self.mode.data == " "
-
 		rospy.on_shutdown(self.shutdown)
 
 		# Subscribe Int32 msg
