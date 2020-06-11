@@ -85,7 +85,7 @@ class BoxIDDisplay:
 		try:
 			rospy.logwarn("BoxIDDisplay node [OFFLINE]")
 		finally:
-			cv2.destroyAllWindows()
+			pass
 
 	def update_display(self):
 
