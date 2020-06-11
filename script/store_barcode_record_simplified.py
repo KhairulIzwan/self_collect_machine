@@ -106,10 +106,10 @@ class StoreBarcodeRecord_node:
 					if self.qr.data not in self.found:
 						# TODO: Publish a data to print on MAX2719
 
-						self.csv.write("{},{},{}\n".format(datetime.datetime.now(), self.qr.data, self.boxID[0]))
+						self.csv.write("{},{},{}\n".format(datetime.datetime.now(), self.qr.data, self.boxID))
 
 						# Publish
-						self.boxPos.data = self.boxID[0] + 1
+						self.boxPos.data = self.boxID + 1
 						self.boxPos_pub.publish(self.boxPos)
 
 						# TODO: Un-comment for troubleshoot
