@@ -1,0 +1,13 @@
+<launch>
+
+	<!-- Raspicam Camera -->
+	<include file="$(find self_collect_machine)/launch/raspicam_robot.launch"/>
+
+	<!-- Store and Customer -->
+	<!-- BarCode/QR-Code Recognition -->
+	<node	pkg="self_collect_machine"
+		type="raspicam_barcode_recognition_simplified_v1.py"
+		name="raspicam_barcode_recognition">
+	</node>
+
+</launch>

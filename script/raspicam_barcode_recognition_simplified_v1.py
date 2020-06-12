@@ -77,23 +77,11 @@ class BarcodeRecognition:
 
 	def cbQRmode(self, msg):
 
-		try:
-			mode = msg.data
-		except KeyboardInterrupt as e:
-			print(e)
-
-		self.code_received = True
-		self.typeQR = mode
+		self.mode = msg.data
 
 	def cbStatus(self, msg):
 
-		try:
-			scan = msg.data
-		except KeyboardInterrupt as e:
-			print(e)
-
-		self.status_received = True
-		self.status = scan
+		self.scan = msg.data
 
 	def preview(self):
 
@@ -168,4 +156,4 @@ if __name__ == '__main__':
 
 	# Camera preview
 	while not rospy.is_shutdown():
-		barcode.getBarcode()
+		barcode.preview()
