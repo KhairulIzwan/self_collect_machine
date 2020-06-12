@@ -51,4 +51,11 @@
 		type="box_display_simplified.py"
 		name="box_display">-->
 	</node>
+
+	<!-- Face Detection-->
+	<!-- Capture -->
+	<node	pkg="common_face_application"
+		type="raspicam_haar_face_detection.py"
+		name="face_detection">-->
+	</node>
 </launch>
