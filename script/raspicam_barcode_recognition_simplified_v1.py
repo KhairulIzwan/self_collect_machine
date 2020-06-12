@@ -123,10 +123,10 @@ class BarcodeRecognition:
 					self.scanCode.data = self.barcodeData
 					self.code_pub.publish(self.scanCode)
 
-					cv2.putText(self.image, self.typeQR, (10, 40), 
+					cv2.putText(self.image, self.mode, (10, 40), 
 						1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-					cv2.putText(self.image, self.status, (10, 60), 
+					cv2.putText(self.image, self.scan, (10, 60), 
 						1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
 					# Refresh the image on the screen
