@@ -85,29 +85,24 @@ class BarcodeRecognition:
 
 	def preview(self):
 
-		if self.image_received:
-			# Overlay some text onto the image display
-			timestr = time.strftime("%Y%m%d-%H%M%S")
-			cv2.putText(self.image, timestr, (10, 20), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+		# Overlay some text onto the image display
+		timestr = time.strftime("%Y%m%d-%H%M%S")
+		cv2.putText(self.image, timestr, (10, 20), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-			# show the output frame
-			cv2.imshow("Frame", self.image)
-			cv2.waitKey(1)
-
-		else:
-			rospy.logerr("No images recieved")
+		# show the output frame
+		cv2.imshow("Frame", self.image)
+		cv2.waitKey(1)
 
 	# Get the Scanned Barcode
-	def getBarcode(self):
-		try:
+	def cbBarcode(self):
 
+		if self.image_received:
 			# find the barcodes in the frame and decode each of the barcodes
 			self.barcodes = pyzbar.decode(self.image)
 
 			if len(self.barcodes) != 0:
 				# loop over the detected barcodes
 				for self.barcode in self.barcodes:
-
 					# extract the bounding box location of the barcode and 
 					# draw the bounding box surrounding the barcode on the 
 					# image
@@ -128,25 +123,19 @@ class BarcodeRecognition:
 					self.scanCode.data = self.barcodeData
 					self.code_pub.publish(self.scanCode)
 
-				# Refresh the image on the screen
-				self.preview()
+					cv2.putText(self.image, self.typeQR, (10, 40), 
+						1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-				if self.code_received:
-					cv2.putText(self.image, self.typeQR, (10, 40), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+					cv2.putText(self.image, self.status, (10, 60), 
+						1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-					self.code_received = False
-
-				if self.status_received:
-					cv2.putText(self.image, self.status, (10, 60), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
-
-					self.status_received = False
-
+					# Refresh the image on the screen
+					self.preview()
 			else:
 				cv2.destroyAllWindows()
 				pass
-
-		except KeyboardInterrupt as e:
-			print(e)
+		else:
+			rospy.logerr("No images recieved")
 
 if __name__ == '__main__':
 
@@ -156,4 +145,4 @@ if __name__ == '__main__':
 
 	# Camera preview
 	while not rospy.is_shutdown():
-		barcode.preview()
+		barcode.cbBarcode()
