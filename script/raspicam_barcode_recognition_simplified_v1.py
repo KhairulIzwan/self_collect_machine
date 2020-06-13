@@ -15,6 +15,9 @@ import sys
 import rospy
 import cv2
 import imutils
+import time
+import numpy as np
+from pyzbar import pyzbar
 
 from std_msgs.msg import String
 from sensor_msgs.msg import CompressedImage
@@ -22,12 +25,6 @@ from sensor_msgs.msg import CameraInfo
 
 from cv_bridge import CvBridge
 from cv_bridge import CvBridgeError
-
-import numpy as np
-
-from pyzbar import pyzbar
-import datetime
-import time
 
 class BarcodeRecognition:
 	def __init__(self):
@@ -77,11 +74,23 @@ class BarcodeRecognition:
 
 	def cbQRmode(self, msg):
 
-		self.mode = msg.data
+		try:
+			mode = msg.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.code_received = True
+		self.typeQR = mode
 
 	def cbStatus(self, msg):
 
-		self.scan = msg.data
+		try:
+			scan = msg.data
+		except KeyboardInterrupt as e:
+			print(e)
+
+		self.status_received = True
+		self.status = scan
 
 	def preview(self):
 
@@ -123,11 +132,14 @@ class BarcodeRecognition:
 					self.scanCode.data = self.barcodeData
 					self.code_pub.publish(self.scanCode)
 
-					cv2.putText(self.image, self.mode, (10, 40), 
-						1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+					if code_received:
+						cv2.putText(self.image, self.typeQR, (10, 40), 
+							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+						self.code_received = False
 
-					cv2.putText(self.image, self.scan, (10, 60), 
-						1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
+					if status_received:
+						cv2.putText(self.image, self.status, (10, 60), 
+							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
 					# Refresh the image on the screen
 					self.preview()
