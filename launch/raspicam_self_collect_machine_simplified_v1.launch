@@ -17,4 +17,11 @@
 		name="barcode_identification">
 	</node>
 
+	<!-- Store (with i2c)-->
+	<!-- Box Validity -->
+	<node	pkg="self_collect_machine"
+		type="box_validity_simplified_i2c_v1.py"
+		name="box_validity">
+	</node>
+
 </launch>
