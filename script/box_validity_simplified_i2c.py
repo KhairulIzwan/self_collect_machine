@@ -75,6 +75,9 @@ class BoxIDValidate_node:
 			self.boxState.data = boxState
 			self.boxStatus_pub.publish(self.boxState)
 
+			# Sleep to give the last log messages time to be sent
+			rospy.sleep(0.5)
+
 	def readI2C(self):
 		inData = i2c.read_byte(I2C_ADD)
 		return inData
