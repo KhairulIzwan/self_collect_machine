@@ -104,8 +104,6 @@ class BarcodeRecognition:
 
 	# Get the Scanned Barcode
 	def cbBarcode(self):
-		# Refresh the image on the screen
-		self.preview()
 
 		if self.image_received:
 			# find the barcodes in the frame and decode each of the barcodes
@@ -143,8 +141,8 @@ class BarcodeRecognition:
 						cv2.putText(self.image, self.status, (10, 60), 
 							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-#					# Refresh the image on the screen
-#					self.preview()
+					# Refresh the image on the screen
+					self.preview()
 			else:
 				cv2.destroyAllWindows()
 				pass
