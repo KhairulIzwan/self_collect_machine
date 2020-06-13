@@ -58,4 +58,5 @@
 	<!--	type="raspicam_haar_face_detection.py"-->
 	<!--	name="face_detection">-->
 	<!--</node>-->
+
 </launch>

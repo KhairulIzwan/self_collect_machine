@@ -41,9 +41,7 @@ class BoxIDTrigger_node:
 
 	def cbBoxTrigger(self, msg):
 
-		rospy.sleep(0.01)
 		i2c.write_byte(I2C_ADD, msg.data)
-#		rospy.loginfo(msg.data)
 
 def main(args):
 

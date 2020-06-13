@@ -173,8 +173,9 @@ class StoreBarcodeRecord_node:
 						rospy.sleep(0.5)
 
 				else:
-					self.scanStatus = "No Empty Box Available"
-					self.scanStatus_pub.publish(self.scanStatus)
+					pass
+#					self.scanStatus = "No Empty Box Available"
+#					self.scanStatus_pub.publish(self.scanStatus)
 
 					# Sleep to give the last log messages time to be sent
 					rospy.sleep(0.5)
