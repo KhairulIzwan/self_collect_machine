@@ -141,13 +141,14 @@ class BarcodeRecognition:
 						cv2.putText(self.image, self.status, (10, 60), 
 							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-					# Refresh the image on the screen
-					self.preview()
 			else:
 				cv2.destroyAllWindows()
 				pass
 		else:
 			rospy.logerr("No images recieved")
+
+		# Refresh the image on the screen
+		self.preview()
 
 if __name__ == '__main__':
 
