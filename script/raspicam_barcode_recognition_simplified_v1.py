@@ -106,6 +106,9 @@ class BarcodeRecognition:
 	def cbBarcode(self):
 
 		if self.image_received:
+			# Refresh the image on the screen
+			self.preview()
+
 			# find the barcodes in the frame and decode each of the barcodes
 			self.barcodes = pyzbar.decode(self.image)
 
@@ -146,9 +149,6 @@ class BarcodeRecognition:
 				pass
 		else:
 			rospy.logerr("No images recieved")
-
-		# Refresh the image on the screen
-		self.preview()
 
 if __name__ == '__main__':
 
