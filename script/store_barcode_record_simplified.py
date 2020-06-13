@@ -67,7 +67,6 @@ class StoreBarcodeRecord_node:
 		# Subscribe boxStatus msg
 		self.boxStatus_sub = rospy.Subscriber("/box_available", boxStatus)
 
-		# TODO
 		# Publish String msg
 		self.scanStatus_pub = rospy.Publisher("/scan_status", String, queue_size=10)
 
@@ -170,9 +169,15 @@ class StoreBarcodeRecord_node:
 						self.scanStatus = "Scanned!"
 						self.scanStatus_pub.publish(self.scanStatus)
 
+						# Sleep to give the last log messages time to be sent
+						rospy.sleep(0.5)
+
 				else:
 					self.scanStatus = "No Empty Box Available"
 					self.scanStatus_pub.publish(self.scanStatus)
+
+					# Sleep to give the last log messages time to be sent
+					rospy.sleep(0.5)
 
 def main(args):
 	vn = StoreBarcodeRecord_node()

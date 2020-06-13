@@ -98,9 +98,15 @@ class CustomerBarcodeRecord_node:
 								self.boxID_active.data = int(row[3]) + 1
 								self.boxID_activation_pub.publish(self.boxID_active)
 
+								# Sleep to give the last log messages time to be sent
+								rospy.sleep(0.5)
+
 				else:
 					self.scanStatus = "Scanned!"
 					self.scanStatus_pub.publish(self.scanStatus)
+
+					# Sleep to give the last log messages time to be sent
+					rospy.sleep(0.5)
 
 def main(args):
 	vn = CustomerBarcodeRecord_node()

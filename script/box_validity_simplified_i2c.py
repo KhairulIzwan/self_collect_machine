@@ -37,7 +37,8 @@ class BoxIDValidate_node:
 		rospy.init_node('box_validity', anonymous=False)
 
 		# Publish boxStatus msg
-		self.boxStatus_pub = rospy.Publisher("/box_available", boxStatus, queue_size=10)
+		boxStatus_topic = "/box_available"
+		self.boxStatus_pub = rospy.Publisher(boxStatus_topic, boxStatus, queue_size=10)
 
 		self.getBoxState()
 

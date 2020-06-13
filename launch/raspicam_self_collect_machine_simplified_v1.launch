@@ -24,4 +24,17 @@
 		name="box_validity">
 	</node>
 
+	<!-- Store -->
+	<!-- BarCode/QR-Code Record -->
+	<node	pkg="self_collect_machine"
+		type="store_barcode_record_simplified.py"
+		name="store_barcode_record">
+	</node>
+
+	<!-- Customer -->
+	<!-- BarCode/QR-Code Record -->
+	<node	pkg="self_collect_machine"
+		type="customer_barcode_validate_record_simplified.py"
+		name="customer_barcode_validate_record">
+	</node>
 </launch>
