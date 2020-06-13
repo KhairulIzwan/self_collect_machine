@@ -53,9 +53,5 @@
 	</node>
 
 	<!-- Face Detection-->
-	<!-- Capture -->
-	<node	pkg="common_face_application"
-		type="raspicam_haar_face_detection.py"
-		name="face_capture">
-	</node>
+	<include file="$(find common_face_application)/launch/raspicam_face_detection.launch"/>
 </launch>
