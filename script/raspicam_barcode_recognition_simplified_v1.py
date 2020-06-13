@@ -150,7 +150,7 @@ class BarcodeRecognition:
 					self.pubScanCode()
 
 					# Sleep to give the last log messages time to be sent
-					rospy.sleep(0.4)
+					rospy.sleep(0.5)
 			else:
 				cv2.destroyAllWindows()
 				pass
