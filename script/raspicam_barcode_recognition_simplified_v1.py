@@ -132,12 +132,12 @@ class BarcodeRecognition:
 					self.scanCode.data = self.barcodeData
 					self.code_pub.publish(self.scanCode)
 
-					if code_received:
+					if self.code_received:
 						cv2.putText(self.image, self.typeQR, (10, 40), 
 							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 						self.code_received = False
 
-					if status_received:
+					if self.status_received:
 						cv2.putText(self.image, self.status, (10, 60), 
 							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
