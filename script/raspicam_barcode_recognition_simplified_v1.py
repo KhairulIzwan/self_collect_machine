@@ -102,6 +102,12 @@ class BarcodeRecognition:
 		cv2.imshow("Frame", self.image)
 		cv2.waitKey(1)
 
+	# Publishing
+	def pubScanCode(self):
+
+		self.scanCode.data = self.barcodeData
+		self.code_pub.publish(self.scanCode)
+
 	# Get the Scanned Barcode
 	def cbBarcode(self):
 
@@ -128,10 +134,6 @@ class BarcodeRecognition:
 					self.barcodeData = self.barcode.data.decode("utf-8")
 					self.barcodeType = self.barcode.type
 
-					# Publishing
-					self.scanCode.data = self.barcodeData
-					self.code_pub.publish(self.scanCode)
-
 					if self.code_received:
 						cv2.putText(self.image, self.typeQR, (10, 40), 
 							1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
@@ -143,6 +145,12 @@ class BarcodeRecognition:
 
 					# Refresh the image on the screen
 					self.preview()
+
+					# Publishing
+					self.pubScanCode()
+
+					# Sleep to give the last log messages time to be sent
+					rospy.sleep(1)
 			else:
 				cv2.destroyAllWindows()
 				pass
