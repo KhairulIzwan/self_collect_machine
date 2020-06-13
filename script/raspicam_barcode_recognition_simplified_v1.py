@@ -106,11 +106,8 @@ class BarcodeRecognition:
 	def cbBarcode(self):
 
 		if self.image_received:
-			# Refresh the image on the screen
-			self.preview()
-
-			# find the barcodes in the frame and decode each of the barcodes
-			self.barcodes = pyzbar.decode(self.image)
+#			# find the barcodes in the frame and decode each of the barcodes
+#			self.barcodes = pyzbar.decode(self.image)
 
 			if len(self.barcodes) != 0:
 				# loop over the detected barcodes
@@ -158,4 +155,5 @@ if __name__ == '__main__':
 
 	# Camera preview
 	while not rospy.is_shutdown():
+		barcode.preview()
 		barcode.cbBarcode()
