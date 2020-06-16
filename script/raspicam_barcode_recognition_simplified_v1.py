@@ -35,8 +35,8 @@ class BarcodeRecognition:
 		self.code_received = False
 		self.status_received = False
 
-		# initialize our video writer
-		self.fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+#		# initialize our video writer
+#		self.fourcc = cv2.VideoWriter_fourcc(*"MJPG")
 
 		# Subscribe Image msg
 		img_topic = "/raspicam_node_robot/image/compressed"
@@ -101,11 +101,11 @@ class BarcodeRecognition:
 		timestr = time.strftime("%Y%m%d-%H%M%S")
 		cv2.putText(self.image, timestr, (10, 20), 1, 1, (255, 255, 255), 1, cv2.LINE_AA, False)
 
-		vid_title = self.barcodeData + "-video.avi"
+#		vid_title = self.barcodeData + "-video.avi"
 
-		# Record a Video
-		self.writer = cv2.VideoWriter(vid_title, self.fourcc, 25, (320, 240), True)
-		self.writer.write(self.image)
+#		# Record a Video
+#		self.writer = cv2.VideoWriter(vid_title, self.fourcc, 25, (320, 240), True)
+#		self.writer.write(self.image)
 
 		# show the output frame
 		cv2.imshow("Frame", self.image)
