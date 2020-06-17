@@ -2,13 +2,19 @@
 
 #define SLAVE_ADD 0x09 // Set Arduino I2C address
 
-#define BUTTON1 2
-#define BUTTON2 3
-#define BUTTON3 4
+#define BUTTON1 10
+#define BUTTON2 11
+#define BUTTON3 12
+//#define BUTTON4 11
+//#define BUTTON5 12
+//#define BUTTON6 13
 
-#define LED1 8
-#define LED2 9
-#define LED3 10
+#define LED1 2
+#define LED2 3
+#define LED3 4
+//#define LED4 10
+//#define LED5 10
+//#define LED6 10
 
 boolean buttonPressed1 = false;
 boolean buttonPressed2 = false;
@@ -26,6 +32,10 @@ void setup()
   pinMode(LED1, OUTPUT);
   pinMode(LED2, OUTPUT);
   pinMode(LED3, OUTPUT);
+
+  digitalWrite(LED1, HIGH);
+  digitalWrite(LED2, HIGH);
+  digitalWrite(LED3, HIGH);
   
   Wire.begin(SLAVE_ADD);
   Wire.onReceive(receiveEvent);
@@ -43,25 +53,24 @@ void loop()
     if (mode == 1)
     {
       delay(1000);
-      digitalWrite(LED1, HIGH);
-      delay(1000);
       digitalWrite(LED1, LOW);
+      delay(1000);
+      digitalWrite(LED1, HIGH);
       delay(1000);
     }
     else if (mode == 2)
     {
-      delay(1000);
-      digitalWrite(LED2, HIGH);
-      delay(1000);
       digitalWrite(LED2, LOW);
+      delay(1000);      
+      digitalWrite(LED2, HIGH);
       delay(1000);
     }
     else if (mode == 3)
     {
       delay(1000);
-      digitalWrite(LED3, HIGH);
-      delay(1000);
       digitalWrite(LED3, LOW);
+      delay(1000);
+      digitalWrite(LED3, HIGH);
       delay(1000);
     }
   }

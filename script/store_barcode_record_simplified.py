@@ -95,7 +95,7 @@ class StoreBarcodeRecord_node:
 			self.getBox()
 
 			self.boxID = np.array(self.box.data)
-			self.boxID = np.where(self.boxID == 1)[0]
+			self.boxID = np.where(self.boxID == 0)[0]
 
 			if self.mode.data == "store":
 				if len(self.boxID) > 0:
