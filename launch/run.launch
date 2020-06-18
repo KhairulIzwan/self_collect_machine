@@ -1,0 +1,15 @@
+<launch>
+
+	<!-- ACCESSING RASPICAM USBCAM WEBCAM -->
+	<include file="$(find accessing_raspicam_usbcam)/launch/camera_robot.launch"/>
+
+	<!-- COMMON BARCODE APPLICATION -->
+	<include file="$(find common_barcode_application)/launch/barcode_application.launch"/>
+
+	<!-- COMMON I2C APPLICATION -->
+	<include file="$(find common_i2c_application)/launch/i2c_comunication.launch"/>
+
+	<!-- COMMON SPI APPLICATION -->
+	<include file="$(find common_spi_application)/launch/spi_communication.launch"/>
+
+</launch>
