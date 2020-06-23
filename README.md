@@ -4,6 +4,19 @@ This project is about to design a self collecting system which ease the customer
 collect thier purchased items during office or after office hours -- by scanning
 the code (BAR/QR)
 
+**Updated**
+The project has been divided into several part to simplified the total system 
+which is:
+1. accessing_raspicam_usbcam -- https://github.com/KhairulIzwan/accessing_raspicam_usbcam.git
+2. common_barcode_application -- https://github.com/KhairulIzwan/common_barcode_application.git
+3. common_i2c_application -- https://github.com/KhairulIzwan/common_i2c_application.git
+4. common_spi_application -- https://github.com/KhairulIzwan/common_spi_application.git
+5. common_video-recording_application -- https://github.com/KhairulIzwan/common_video-recording_application
+
+**Usage**
+1. roslaunch self_collect_machine run.launch
+2. rosrun common_video-recording_application time_record.py
+
 **Notes**
 
 StoreQR: OrderID & CustomerEmail
